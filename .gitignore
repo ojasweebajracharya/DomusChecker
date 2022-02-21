@@ -1,5 +1,5 @@
 # pycharm files
-/venv/lib
-/venv/scripts
+/venv/Lib
+/venv/Scripts
 /venv/pyvenv.cfg
 /.idea
