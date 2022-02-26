@@ -1,3 +1,1 @@
-discord
-beautifulsoup
-requests
+worker: python3 main.py
