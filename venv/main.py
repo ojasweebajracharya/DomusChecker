@@ -4,4 +4,14 @@ import requests
 url = "https://domus.ed.ac.uk/properties/"
 
 result = requests.get(url)
-print(result.text)
+
+doc = BeautifulSoup(result.text, "html.parser")
+
+addresses = doc.find_all('p', class_='property-address')
+
+
+# Get all property names, addresses, bedrooms, postcode and link
+
+
+# filter only addresses
+
