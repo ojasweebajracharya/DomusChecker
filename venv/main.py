@@ -26,13 +26,16 @@ links = doc.find_all('a', class_='property-title-link')
 postcode = []
 
 for each in addresses:
-    postcode.append(str(each.get_text()))
+    input = str(each.get_text())
+    input = " ".join(input.split())
+    postcode.append(input)
+print(postcode[0])
 
 
 for i in range(len(addresses)):
     properties.append([streetnames[i].next, postcode[i], links[i]['href']])
 
-print(properties[0])
+# print(properties[0])
 
 
 # Get all property names, addresses, bedrooms, postcode and link
