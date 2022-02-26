@@ -1,45 +1,35 @@
-from audioop import add
 from bs4 import BeautifulSoup
 import requests
 
-url = "https://domus.ed.ac.uk/properties/"
+def scrapeDomus():
+    url = "https://domus.ed.ac.uk/properties/"
 
-result = requests.get(url)
+    result = requests.get(url)
 
-properties = []
+    properties = []
 
-doc = BeautifulSoup(result.text, "html.parser")
+    doc = BeautifulSoup(result.text, "html.parser")
 
-streetnames = doc.find_all('h3') # ignore first and last it's just "refine search"
+    streetnames = doc.find_all('h3') # ignore first and last it's just "refine search"
 
-# cleaning streetnames
-streetnames.pop(0)
-streetnames.pop(len(streetnames) - 1)
+    # cleaning streetnames
+    streetnames.pop(0)
+    streetnames.pop(len(streetnames) - 1)
 
-addresses = doc.find_all('p', class_='property-address')
-links = doc.find_all('a', class_='property-title-link')
-# bedrooms
-prices = doc.find_all('p', class_='property-price')
-# for i in range(len())
-print(str(prices[0].get_text()))
-# print(links[0]['href']) # example of how to get the linkkk
-print(len(prices))
-postcode = []
+    addresses = doc.find_all('p', class_='property-address')
+    links = doc.find_all('a', class_='property-title-link')
+    prices = doc.find_all('p', class_='property-price')
 
-for each in addresses:
-    input = str(each.get_text())
-    input = " ".join(input.split())
-    postcode.append(input[-7:])
+    postcode = []
+
+    for each in addresses:
+        input = str(each.get_text())
+        input = " ".join(input.split())
+        postcode.append(input[-7:])
 
 
-for i in range(len(addresses)):
-    properties.append([streetnames[i].next, postcode[i], links[i]['href']])
+    for i in range(len(addresses)):
+        properties.append([streetnames[i].next, postcode[i], links[i]['href']])
 
-print(properties[0])
-
-
-# Get all property names, addresses, bedrooms, postcode and link
-
-
-# filter only addresses
+    return properties
 
