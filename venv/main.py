@@ -29,7 +29,6 @@ for each in addresses:
     postcode.append(str(each.get_text()))
 
 
-
 for i in range(len(addresses)):
     properties.append([streetnames[i].next, postcode[i], links[i]['href']])
 
