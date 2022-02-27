@@ -6,6 +6,7 @@ import os
 
 
 client = discord.Client()
+domusChannel = client.get_channel(947544149647851610)
 # @client.event
 # async def on_ready():
 #     print("WE have logged in as {0.user".format(client))
@@ -24,7 +25,7 @@ async def on_message(message):
 #     await scrapeDomus()
 
 
-@aiocron.crontab('57 17 * * *')
+@aiocron.crontab('10 18 * * *')
 async def cornjob():
     await loopPagesDomus()
 
@@ -34,6 +35,7 @@ async def loopPagesDomus():
     # realistically, it won't go above 5 anyway so I thin we're good.
     for page_num in range(1, 5):
         url = "https://domus.ed.ac.uk/properties/#/requested_page=" + str(page_num) + "&sort_order=DESC&sort_by=price&i=1&unique_hash=93733"
+        await domusChannel.send("page: ", str(page_num))
         await printScrapeDomusResults(url)
 
 
