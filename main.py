@@ -1,3 +1,4 @@
+import aiocron
 from bs4 import BeautifulSoup
 import requests
 import discord
@@ -6,8 +7,9 @@ import os
 
 client = discord.Client()
 @client.event
-async  def on_ready():
+async def on_ready():
     print("WE have logged in as {0.user".format(client))
+
 
 @client.event
 async def on_message(message):
@@ -16,10 +18,33 @@ async def on_message(message):
     if message.content.startswith("$hello"):
         await message.channel.send("Hello!")
 
-client.run(os.getenv('TOKEN'))
 
-def scrapeDomus():
-    url = "https://domus.ed.ac.uk/properties/"
+@aiocron.crontab('*/10 08-010 * * *')
+async def cornjob():
+    await scrapeDomus()
+
+
+# @aiocron.crontab('27 17 * * *')
+# async def cornjob():
+#     await scrapeDomus()
+
+
+def loopPagesDomus():
+    # so we've capped the page number at 5 max, too long to try fix it accurately.
+    # realistically, it won't go above 5 anyway so I thin we're good.
+    for page_num in range(1, 5):
+        url = "https://domus.ed.ac.uk/properties/#/requested_page=" + page_num + "&sort_order=DESC&sort_by=price&i=1&unique_hash=93733"
+        printScrapeDomusResults(url)
+
+
+async def printScrapeDomusResults(url):
+    domusChannel = client.get_channel(947544149647851610)
+
+    await domusChannel.send(scrapeDomus(url))
+
+
+def scrapeDomus(url):
+    # url = "https://domus.ed.ac.uk/properties/"
 
     result = requests.get(url)
 
@@ -44,9 +69,10 @@ def scrapeDomus():
         input = " ".join(input.split())
         postcode.append(input[-7:])
 
-
     for i in range(len(addresses)):
         properties.append([streetnames[i].next, postcode[i], links[i]['href']])
 
     return properties
 
+
+client.run(os.getenv('TOKEN'))
