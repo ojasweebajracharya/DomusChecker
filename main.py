@@ -24,7 +24,7 @@ async def on_message(message):
 #     await scrapeDomus()
 
 
-@aiocron.crontab('13 18 * * *')
+@aiocron.crontab('15 18 * * *')
 async def cornjob():
     await loopPagesDomus()
 
@@ -36,7 +36,7 @@ async def loopPagesDomus():
 
     for page_num in range(1, 5):
         url = "https://domus.ed.ac.uk/properties/#/requested_page=" + str(page_num) + "&sort_order=DESC&sort_by=price&i=1&unique_hash=93733"
-        await domusChannel.send("page: ", str(page_num))
+        await domusChannel.send("page: " + str(page_num))
         await printScrapeDomusResults(url)
 
 
