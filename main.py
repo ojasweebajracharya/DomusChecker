@@ -57,8 +57,9 @@ async def printScrapeDomusResults(url):
 
 def scrapeDomus(url):
     # url = "https://domus.ed.ac.uk/properties/"
-
-    result = requests.get(url)
+    headers = {
+        'user-agent': 'Two Edinburgh Uni CompSci Students :)) (https://github.com/ojasweebajracharya/DomusChecker)'}
+    result = requests.get(url, headers)
 
     properties = []
 
