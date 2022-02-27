@@ -24,7 +24,7 @@ async def on_message(message):
 #     await scrapeDomus()
 
 
-@aiocron.crontab('42 18 * * *')
+@aiocron.crontab('44 18 * * *')
 async def cornjob():
     await loopPagesDomus()
 
