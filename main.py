@@ -33,7 +33,7 @@ async def loopPagesDomus():
     # so we've capped the page number at 5 max, too long to try fix it accurately.
     # realistically, it won't go above 5 anyway so I thin we're good.
     for page_num in range(1, 5):
-        url = "https://domus.ed.ac.uk/properties/#/requested_page=" + page_num + "&sort_order=DESC&sort_by=price&i=1&unique_hash=93733"
+        url = "https://domus.ed.ac.uk/properties/#/requested_page=" + str(page_num) + "&sort_order=DESC&sort_by=price&i=1&unique_hash=93733"
         await printScrapeDomusResults(url)
 
 
