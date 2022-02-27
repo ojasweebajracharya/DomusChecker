@@ -42,6 +42,13 @@ async def loopPagesDomus():
     #     await domusChannel.send("url: " + url)
     #     await printScrapeDomusResults(url)
 
+    for page_num in range(2, 3):
+        url = "https://domus.ed.ac.uk/properties/#/requested_page=" + str(page_num) + "&sort_order=DESC&sort_by=price&i=1&unique_hash=93733"
+        await domusChannel.send("page: " + str(page_num))
+        await domusChannel.send("url: " + url)
+        await printScrapeDomusResults(url)
+>>>>>>> ce50131696a33bb1a3700e7b64836cb90d4c6e2a
+
 
 async def printScrapeDomusResults(url):
     domusChannel = client.get_channel(947544149647851610)
