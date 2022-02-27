@@ -6,9 +6,9 @@ import os
 
 
 client = discord.Client()
-@client.event
-async def on_ready():
-    print("WE have logged in as {0.user".format(client))
+# @client.event
+# async def on_ready():
+#     print("WE have logged in as {0.user".format(client))
 
 
 @client.event
@@ -24,7 +24,7 @@ async def on_message(message):
 #     await scrapeDomus()
 
 
-@aiocron.crontab('30 17 * * *')
+@aiocron.crontab('40 17 * * *')
 async def cornjob():
     await loopPagesDomus()
 
